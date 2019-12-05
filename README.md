@@ -105,17 +105,17 @@ src
 ### Decorators
 > NestJs封装了大量的decorator， 同时如果有需要我们也可以实现自己的decorator  
 
-|Decorators |
-|--|:--|
-|@Module()           |
-|@Controller()       |
-|@Post()             |
-|@Get()              |
-|@Query()            |
-|@Param()            |
-|@Injectable()       |
-|@UsePipes()         |
-|...|
+Decorators          |
+--|
+@Module()           |
+@Controller()       |
+@Post()             |
+@Get()              |
+@Query()            |
+@Param()            |
+@Injectable()       |
+@UsePipes()         |
+...|
 
 ### OpenAPI (Swagger)
 - 如何使用Swagger插件
