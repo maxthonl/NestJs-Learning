@@ -111,7 +111,7 @@ $ nest g -h
 - platform-fastify
 ### Module
 > @Module 装饰器用来声明一个module。可以用@Global来声明这个module是全局的，也可以使用forRoot（）来动态创建一个模块
-```js
+```ts
 @Global()
 @Module({
     providers: [DatabaseProvider]
@@ -137,7 +137,7 @@ export class DatabaseModule {
 4. Status Code - *@HttpCode*
 5. Headers - *@Header*
 6. Request Parameters - *@req, @Body, @Param, @Query, @Headers*
-```js
+```ts
 import { Controller, Get, Query, Post, Body, Put, Param, Delete } from '@nestjs/common';
 import { CreateCatDto, UpdateCatDto, ListAllEntities } from './dto';
 
@@ -171,7 +171,7 @@ export class CatsController {
 1. Scope - *__SINGLETON__, REQUEST, TRANSIENT*
 2. Types - *Class-based, Property-based, Optional*
 3. Registration - *useValue, useClass, useFactory, useExisting*
-```js
+```ts
 // 一个injectable 的 service类
 @Injectable()
 export class CatsService {
@@ -195,38 +195,51 @@ export class AppModule {}
 ---
 ### Middleware
 > 我们可以创建两种 Middleware 1. class-based， 2. function-based
-```js
-// 创建自己的middleware
-@Injectable()
-export class LoggerMiddleware implements NestMiddleware {
-  use(req: Request, res: Response, next: Function) {
-    console.log('Request...');
-    next();
-  }
-}
-
-// 在module的configuratio中使用
-@Module({
-  imports: [CatsModule],
-})
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('cats');
-  }
+```ts
+//NestJs 中 MiddlewareConsumer的接口定义
+export interface MiddlewareConsumer {
+    /**
+     * @param  middleware middleware class/function or array of classes/functions
+     * to be attached to the passed routes.
+     *
+     * @returns {MiddlewareConfigProxy}
+     */
+    apply(...middleware: (Type<any> | Function)[]): MiddlewareConfigProxy;
 }
 ```
 ---
 ### Pipe
-> 
+> 管道操作主要用于整理输入并输出。NestJs内置了ValidationPipe 但是需要安装以下两个pkg。
 ```bash
 $ npm i --save class-validator class-transformer
+```
+> Pipe可以在app范围内全局注册
+```ts
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(3000);
+}
+```
+> 也可以局部注册
+```ts
+// Controller 内
+@Post()
+@UsePipes(ValidationPipe)
+async create(@Body() createCatDto: CreateCatDto) {
+  this.catsService.create(createCatDto);
+}
 ```
 
 ---
 ### Decorators
-> NestJs封装了大量的decorator， 同时如果有需要我们也可以实现自己的decorator  
+> NestJs封装了大量的decorator， 同时如果有需要我们也可以实现自己的decorator
+> 总共有四类decorator 
+> 1. Class Decorator
+> 2. Method Decorator
+> 3. Property Decorator
+> 4. Parameter Decorator
+> 关于decorator可参考typescript的handbook [http://www.typescriptlang.org/docs/handbook/decorators.html]
 
 Decorators |
 --|
@@ -241,4 +254,7 @@ Decorators |
 ...|
 
 ### OpenAPI (Swagger)
-- 如何创建Swagger
+- NestJs提供了Swagger文档生成工具。 首先需要安装下面两个包:
+```bash
+$ npm install --save @nestjs/swagger swagger-ui-express
+```
