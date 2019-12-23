@@ -41,7 +41,7 @@ $ npm i @nestjs/cli -g
 
 参数|用途
 --|--
--d, --debug [hostport]   | debug模式运行(node inspect mode)，允许在浏览器中使用nodejs调试 ![image][link1]
+-d, --debug [hostport]   | debug模式运行(node inspect mode)，允许在浏览器中使用nodejs调试 ![avatar][link1]
 -e, --exec [binary]      | 二进制执行文件，默认是node
 
 ## $ nest generate|g [options] <schematic> [name] [path]
