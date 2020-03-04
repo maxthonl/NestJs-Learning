@@ -6,7 +6,7 @@
 >
 > 这种调试方式只能调试server启动后的逻辑，server启动时的逻辑无法调试。如果专注于项目的业务逻辑而不是nest架构逻辑，那么这就不是一个缺点。
 >
-> ![image](https://github.com/maxthonl/NestJs-Training/blob/master/images/02_debug_01.png?raw=true)
+> ![image](https://github.com/maxthonl/NestJs-Learning/blob/master/images/02_debug_01.png?raw=true)
 
 ## 2. tsc 调试
 > 比较中规中矩的一种调试方式，在项目的根目录下打开vs code，侧边栏中找到debug并点击进去，一开始如果没有任何调试配置项，vscode会提示你创建一个调试项，跟着向导选择node.js，接着就会初始化一个launch.json文件，该文件就在项目文件夹下的.vscode文件夹下。
