@@ -3,9 +3,9 @@
 ## `npm init`
 > 在开发一个全新的项目的时候我们需要对一些基本的项目信息做初始化动作，即`npm init`，terminal进入项目文件夹内，执行`npm init`命令，按照控制台提示一步步完成操作即可，完成后会在项目文件夹内生成项目的package.json文件，简单的来看下这个文件:
 
-```json
+```js
 {
-  "name": "test-npm", // 默认项目文件夹名字，你也可以指定别的名字
+  "name": "test-npm",  // 默认项目文件夹名字，你也可以指定别的名字
   "version": "1.0.0", // 项目版本号
   "description": "this is a training demo for `npm init`", // 项目描述
   "main": "index.js", // 入口文件，调试时会用到
@@ -46,8 +46,7 @@ $ npm install tslint --save-dev
 ```json
 "scripts": {
     "build": "tsc -p tsconfig.build.json",
-    "format": "prettier --write \"src/**/*.ts\"",
-    ...
+    "format": "prettier --write \"src/**/*.ts\""
 }
 ```
 > 这个时候我们就可以在terminal中使用简单的npm命令了，`npm run build`， 看到build我们就知道，哦～，这个是用来构建的， `npm run format`，看到format我们就知道， 哦～，这个是用来格式化的。`npm start`是一个特殊的script，不需要在scripts中有所体现，除非你想控制它。
